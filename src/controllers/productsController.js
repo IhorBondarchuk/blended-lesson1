@@ -19,7 +19,10 @@ export const getProductbyId = async (req, res) => {
 };
 
 export const createProduct = async (req, res) => {
-  const product = await Product.create(req.body);
+  const product = await Product.create({
+    ...req.body,
+    userId: req.user._id,
+  });
 
   res.status(201).json(product);
 };
